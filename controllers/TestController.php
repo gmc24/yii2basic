@@ -9,6 +9,7 @@
 namespace app\controllers;
 
 
+use app\components\TestService;
 use app\models\Product;
 use yii\web\Controller;
 
@@ -16,7 +17,13 @@ class TestController extends Controller
 {
     public function actionIndex()
     {
-        $cntnt = __METHOD__;
+
+//        $new = new TestService(['var'=>'i324ug5j2345hgv']);
+//        $cntnt = $new->run()."<br>";
+        $cntnt =  \Yii::$app->test->run();
+
+        $cntnt .= "<br>".__METHOD__;
+//        $cntnt = __METHOD__;
         $my_model = new Product();
         $my_model->id = 1;
         $my_model->name = 'My First Product';
