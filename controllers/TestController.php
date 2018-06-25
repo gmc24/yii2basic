@@ -25,10 +25,10 @@ class TestController extends Controller
         $cntnt .= "<br>".__METHOD__;
 //        $cntnt = __METHOD__;
         $my_model = new Product();
-        $my_model->id = 1;
+/*        $my_model->id = 1;
         $my_model->name = 'My First Product';
         $my_model->category = 'GOODS';
-        $my_model->price = 300;
+        $my_model->price = 300;*/
 //        return $this->renderContent($content);
         return $this->render('index', [
             'cntnt' => $cntnt,
