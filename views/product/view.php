@@ -33,6 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'html',
                 'value' => Html::tag('strong', $model->name)],
             'price',
+            'category',
             'created_at:datetime',
         ],
     ]) ?>

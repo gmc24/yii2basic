@@ -24,6 +24,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'price') ?>
 
+    <?= $form->field($model, 'category') ?>
+
     <?= $form->field($model, 'created_at') ?>
 
     <div class="form-group">

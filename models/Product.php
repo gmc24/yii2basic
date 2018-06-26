@@ -14,6 +14,10 @@ use Yii;
  */
 class Product extends \yii\db\ActiveRecord
 {
+
+    const SCENARIO_CREATE = 'create';
+    const SCENARIO_UPDATE = 'update';
+
     /**
      * {@inheritdoc}
      */
@@ -25,12 +29,26 @@ class Product extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+
+    public function scenarios()
+    {
+        return [
+            self::SCENARIO_DEFAULT => ['name'],
+            self::SCENARIO_CREATE => ['name', 'price', 'created_at', 'category'],
+            self::SCENARIO_UPDATE => ['category', 'price'],
+            ];
+    }
+
     public function rules()
     {
         return [
             [['name', 'price', 'created_at'], 'required'],
             [['created_at'], 'integer'],
-            [['name', 'price'], 'string', 'max' => 50],
+            [['name', 'category'], 'string', 'max' => 20],
+            [['name'], 'filter', 'filter' => function($value){
+                return strip_tags(trim($value));
+            }],
+            [['price'], 'integer', 'max' => 1000, 'min' => 0],
         ];
     }
 
@@ -43,6 +61,7 @@ class Product extends \yii\db\ActiveRecord
             'id' => 'ID',
             'name' => 'Name',
             'price' => 'Price',
+            'category' => 'Category',
             'created_at' => 'Created At',
         ];
     }

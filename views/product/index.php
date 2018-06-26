@@ -34,6 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             'price',
+            'category',
             ['attribute' => 'created_at',
                 'format' => 'datetime',
                 'contentOptions' => ['class' => 'small']
