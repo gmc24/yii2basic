@@ -53,6 +53,13 @@ class TestController extends Controller
         ])
             ->execute();
 
+ \Yii::$app->db->createCommand()->batchInsert('event', ['text','dt','creator_id','created_at'], [
+            ['My Happy Birthday Party!','2018-07-01 16:00:00',3,new \yii\db\Expression('NOW()')],
+            ['By a gift for Ann','2018-06-30 10:30:00',1,new \yii\db\Expression('NOW()')],
+            ['Don\'t forget about Ann\'s birth-party','2018-07-01 16:00:00',1,new \yii\db\Expression('NOW()')],
+        ])
+            ->execute();
+
         return 'Inserted';
     }
 
@@ -62,8 +69,12 @@ class TestController extends Controller
 
         $user2 = (new Query()) -> from('user') -> where(['>','id',1]) -> orderBy('name');
         $user3 = (new Query()) -> from('user');
+        $user4 = (new Query()) -> select(['event.*', 'user.username']) -> from('event')
+        -> innerJoin('user','user.id = event.creator_id')
+        -> orderBy('event.id');
 //        _end($user1->one());
 //        _end($user2->all());
-        _end($user3->count());
+//        _end($user3->count());
+        _end($user4->all());
     }
 }
